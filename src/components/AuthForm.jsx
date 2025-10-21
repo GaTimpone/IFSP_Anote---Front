@@ -75,8 +75,11 @@ export default function AuthForm({
         <VStack spacing={4} align="stretch">
           {fields.map((field) => (
             <FormControl key={field.name} isRequired={field.required}>
-              <FormLabel fontWeight="semibold">{field.label}</FormLabel>
+              <FormLabel htmlFor={field.name} fontWeight="semibold">
+                {field.label}
+              </FormLabel>
               <Input
+                id={field.name}
                 type={field.type}
                 name={field.name}
                 onChange={handleChange}

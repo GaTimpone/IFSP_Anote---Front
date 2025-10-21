@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1761003841818" clover="3.2.0">
+  <project timestamp="1761003841819" name="All files">
+    <metrics statements="30" coveredstatements="21" conditionals="10" coveredconditionals="6" methods="9" coveredmethods="7" elements="49" coveredelements="34" complexity="0" loc="30" ncloc="30" packages="2" files="3" classes="3"/>
+    <package name="components">
+      <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="3" methods="5" coveredmethods="5"/>
+      <file name="AuthForm.jsx" path="C:\Users\gabri\OneDrive\Documentos\GitHub\IFSP_Anote---Front\src\components\AuthForm.jsx">
+        <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="3" methods="5" coveredmethods="5"/>
+        <line num="23" count="9" type="stmt"/>
+        <line num="24" count="9" type="stmt"/>
+        <line num="26" count="9" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
+        <line num="33" count="9" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="48" count="9" type="stmt"/>
+        <line num="77" count="18" type="stmt"/>
+      </file>
+    </package>
+    <package name="pages">
+      <metrics statements="19" coveredstatements="10" conditionals="6" coveredconditionals="3" methods="4" coveredmethods="2"/>
+      <file name="LoginPage.jsx" path="C:\Users\gabri\OneDrive\Documentos\GitHub\IFSP_Anote---Front\src\pages\LoginPage.jsx">
+        <metrics statements="11" coveredstatements="10" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="17" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+      </file>
+      <file name="RegisterPage.jsx" path="C:\Users\gabri\OneDrive\Documentos\GitHub\IFSP_Anote---Front\src\pages\RegisterPage.jsx">
+        <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
