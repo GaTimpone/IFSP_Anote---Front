@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import RegisterPage from "../RegisterPage";
+import CadastroPage from "../CadastroPage";
 import { ChakraProvider } from "@chakra-ui/react";
 
-describe("RegisterPage", () => {
+describe("CadastroPage", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     global.fetch = jest.fn();
@@ -24,7 +24,7 @@ describe("RegisterPage", () => {
 
     render(
       <ChakraProvider>
-        <RegisterPage />
+        <CadastroPage />
       </ChakraProvider>
     );
 
@@ -64,7 +64,7 @@ describe("RegisterPage", () => {
 
     render(
       <ChakraProvider>
-        <RegisterPage />
+        <CadastroPage />
       </ChakraProvider>
     );
 

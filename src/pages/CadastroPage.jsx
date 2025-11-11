@@ -1,8 +1,10 @@
 import { Center } from "@chakra-ui/react";
 import AuthForm from "../components/AuthForm";
+import { useNavigate } from "react-router-dom";
 
-export default function RegisterPage() {
-  const handleRegister = async ({ nome, email, senha }) => {
+export default function CadastroPage() {
+  const navigate = useNavigate();
+  const handleCadastro = async ({ nome, email, senha }) => {
     const response = await fetch("http://localhost:8080/usuarios", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -15,7 +17,7 @@ export default function RegisterPage() {
 
     const usuario = await response.json();
     alert("Cadastro bem-sucedido! Bem-vindo, " + usuario.nome);
-    window.location.href = "/login";
+    navigate("/");
   };
 
   return (
@@ -27,7 +29,7 @@ export default function RegisterPage() {
           { label: "Email", name: "email", type: "email", required: true },
           { label: "Senha", name: "senha", type: "password", required: true },
         ]}
-        onSubmit={handleRegister}
+        onSubmit={handleCadastro}
         footerText="Já tem conta?"
         footerLink="/login"
         footerLinkText="Entre aqui"
