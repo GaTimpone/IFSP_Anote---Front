@@ -5,18 +5,20 @@ import { useNavigate } from "react-router-dom";
 export default function CadastroPage() {
   const navigate = useNavigate();
   const handleCadastro = async ({ nome, email, senha }) => {
-    const response = await fetch("http://localhost:8080/usuarios", {
+    const res = await fetch("http://localhost:8080/usuarios", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nome, email, senha }),
     });
 
-    if (!response.ok) {
-      throw new Error("Erro no cadastro: " + response.status);
+    if (!res.ok) {
+      throw new Error("Erro ao criar usuário");
     }
 
-    const usuario = await response.json();
-    alert("Cadastro bem-sucedido! Bem-vindo, " + usuario.nome);
+    const usuario = await res.json();
+
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+
     navigate("/");
   };
 
