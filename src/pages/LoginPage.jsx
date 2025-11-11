@@ -1,7 +1,9 @@
 import { Center } from "@chakra-ui/react";
 import AuthForm from "../components/AuthForm";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const handleLogin = async ({ email, senha }) => {
     console.log("Enviando:", { email, senha });
 
@@ -24,6 +26,7 @@ export default function LoginPage() {
     const usuario = await response.json();
     localStorage.setItem("usuario", JSON.stringify(usuario));
     alert("Login bem-sucedido! Bem-vindo, " + usuario.nome);
+    navigate("/");
   };
 
   return (
