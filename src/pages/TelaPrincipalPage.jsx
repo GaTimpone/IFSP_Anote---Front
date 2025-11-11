@@ -12,7 +12,7 @@ import {
   Input,
   Textarea,
 } from "@chakra-ui/react";
-import { FiPlus, FiLogOut } from "react-icons/fi";
+import { FiPlus, FiLogOut, FiMenu, FiChevronLeft } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CadernoList from "../components/CadernoList";
@@ -174,7 +174,7 @@ export default function TelaPrincipalPage() {
 
           <IconButton
             aria-label="Alternar menu"
-            icon={<FiPlus />} // pode trocar por um ícone de menu, ex: FiMenu
+            icon={sidebarAberta ? <FiChevronLeft /> : <FiMenu />}
             size="sm"
             variant="ghost"
             onClick={() => setSidebarAberta(!sidebarAberta)}

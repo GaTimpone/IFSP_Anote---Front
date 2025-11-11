@@ -9,7 +9,7 @@ import {
   useToast,
   Input,
 } from "@chakra-ui/react";
-import { FiFolder, FiTrash2, FiEdit2 } from "react-icons/fi";
+import { FiFolder, FiTrash2, FiEdit2, FiFileText } from "react-icons/fi";
 import { useState } from "react";
 import AnotacaoList from "./AnotacaoList";
 
@@ -174,7 +174,7 @@ export default function CadernoList({
             })
           }
         >
-          <FiFolder /> &nbsp; Sem caderno
+          <FiFileText /> &nbsp; Sem caderno
         </Button>
 
         <Collapse in={selecionado?.isUncategorized} animateOpacity>
