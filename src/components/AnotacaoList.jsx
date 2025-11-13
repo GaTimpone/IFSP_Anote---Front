@@ -11,12 +11,6 @@ import { FiFileText, FiPlus } from "react-icons/fi";
 import { useEffect, useState, useRef } from "react";
 import AnotacaoForm from "./AnotacaoForm";
 
-/**
- * Props:
- * - cadernoId: number | null  (null = sem caderno / usar usuarioId)
- * - usuarioId: number (necessário quando cadernoId === null)
- * - onSelectAnotacao, anotacaoSelecionada, refreshKey, onAnotacaoCreated, onAnotacaoMoved
- */
 export default function AnotacaoList({
   cadernoId,
   usuarioId,
@@ -50,10 +44,10 @@ export default function AnotacaoList({
         const semCaderno = userAnotacoes.filter(
           (a) => !idsEmCadernos.has(a.id)
         );
-        console.log(
-          `📘 Anotações sem caderno do usuário ${usuarioId}:`,
-          semCaderno
-        );
+        //console.log(
+        //  `📘 Anotações sem caderno do usuário ${usuarioId}:`,
+        //  semCaderno
+        //);
         setAnotacoes(semCaderno);
       } catch (err) {
         console.error("Erro ao carregar anotações sem caderno:", err);
@@ -71,7 +65,7 @@ export default function AnotacaoList({
       if (!res.ok) throw new Error("Erro ao buscar caderno");
       const data = await res.json();
       const lista = data.anotacoes || [];
-      console.log(`📘 Anotações do caderno ${cadernoId}:`, lista);
+      //console.log(`📘 Anotações do caderno ${cadernoId}:`, lista);
       setAnotacoes(lista);
     } catch (err) {
       console.error("Erro ao carregar anotações do caderno:", err);
@@ -88,7 +82,6 @@ export default function AnotacaoList({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cadernoId, usuarioId, refreshKey]);
 
-  // modal
   const handleTriggerOpen = (openFn) => {
     openModalRef.current = openFn;
   };
@@ -107,7 +100,6 @@ export default function AnotacaoList({
     if (typeof onAnotacaoCreated === "function") onAnotacaoCreated(nova);
   };
 
-  // drag handlers for drop zone (this entire component box acts as drop target)
   const handleDragOver = (e) => {
     e.preventDefault();
     setIsOver(true);
@@ -124,11 +116,9 @@ export default function AnotacaoList({
       if (!payload) return;
       const { id: anotacaoId, fromCadernoId } = JSON.parse(payload);
 
-      // se já está no mesmo destino, nada a fazer
-      const targetCadernoId = cadernoId; // null ou number
+      const targetCadernoId = cadernoId;
       if (String(fromCadernoId) === String(targetCadernoId)) return;
 
-      // buscar anotação completa
       const getRes = await fetch(
         `http://localhost:8080/anotacoes/${anotacaoId}`
       );
@@ -155,7 +145,6 @@ export default function AnotacaoList({
       if (!putRes.ok) throw new Error("Erro ao mover anotação");
       const updated = await putRes.json();
 
-      // informa o pai para dar refresh; seleciona moved
       if (typeof onAnotacaoMoved === "function") onAnotacaoMoved(updated);
       else if (typeof onAnotacaoCreated === "function")
         onAnotacaoCreated(updated);

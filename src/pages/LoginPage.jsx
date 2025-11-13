@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
   const navigate = useNavigate();
   const handleLogin = async ({ email, senha }) => {
-    console.log("Enviando:", { email, senha });
+    //console.log("Enviando:", { email, senha });
 
     const response = await fetch("http://localhost:8080/usuarios/login", {
       method: "POST",

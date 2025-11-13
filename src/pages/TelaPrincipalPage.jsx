@@ -19,7 +19,7 @@ import CadernoList from "../components/CadernoList";
 import CadernoForm from "../components/CadernoForm";
 
 export default function TelaPrincipalPage() {
-  const bgSidebar = useColorModeValue("purple.50", "purple.900"); // roxo fraquinho no light
+  const bgSidebar = useColorModeValue("purple.90", "purple.900");
   const bgTelaPrincipal = useColorModeValue("white", "gray.800");
   const navigate = useNavigate();
   const toast = useToast();
@@ -185,7 +185,7 @@ export default function TelaPrincipalPage() {
           <>
             <HStack justify="space-between" mb={2}>
               <Text fontSize="lg" fontWeight="bold">
-                Cadernos
+                Seus Cadernos
               </Text>
               <IconButton
                 aria-label="Adicionar caderno"
@@ -264,14 +264,35 @@ export default function TelaPrincipalPage() {
                 colorScheme="red"
                 variant="outline"
                 onClick={async () => {
-                  /* seu delete */
+                  try {
+                    const res = await fetch(
+                      `http://localhost:8080/anotacoes/${anotacaoSelecionada.id}`,
+                      { method: "DELETE" }
+                    );
+                    if (!res.ok) throw new Error("Erro ao excluir anotação");
+                    toast({
+                      title: "Anotação excluída",
+                      status: "success",
+                      duration: 2000,
+                      isClosable: true,
+                    });
+                    setAnotacaoSelecionada(null);
+                    setAnotacoesRefreshKey((k) => k + 1);
+                  } catch (err) {
+                    console.error(err);
+                    toast({
+                      title: "Erro ao excluir anotação",
+                      status: "error",
+                      duration: 2000,
+                      isClosable: true,
+                    });
+                  }
                 }}
               >
                 Excluir
               </Button>
             </HStack>
 
-            {/* Envolver o textarea em um box flexível é essencial */}
             <Box flex="1" minH="0" overflow="auto">
               <Textarea
                 value={editCorpo}

@@ -13,14 +13,6 @@ import { FiFolder, FiTrash2, FiEdit2, FiFileText } from "react-icons/fi";
 import { useState } from "react";
 import AnotacaoList from "./AnotacaoList";
 
-/**
- * CadernoList agora aceita drops no cabeçalho do caderno e em "Sem caderno".
- *
- * props adicionais esperados:
- * - onAnotacaoMoved(updatedAnotacao)  // chamado após PUT bem-sucedido
- * - onAnotacaoCreated(...) (mantido)
- * - usuario (usado para sem-caderno)
- */
 export default function CadernoList({
   cadernos,
   selecionado,
@@ -35,7 +27,7 @@ export default function CadernoList({
   const toast = useToast();
   const [editandoId, setEditandoId] = useState(null);
   const [novoTitulo, setNovoTitulo] = useState("");
-  const [hoverId, setHoverId] = useState(undefined); // id do caderno onde o drag está em cima; 'uncat' para sem caderno
+  const [hoverId, setHoverId] = useState(undefined);
 
   const handleDelete = async (id) => {
     try {
@@ -76,24 +68,21 @@ export default function CadernoList({
     }
   };
 
-  // função genérica que recebe payload do dataTransfer e faz o PUT para mover a anotação
   const moveAnotacaoToCaderno = async (anotacaoId, targetCadernoId) => {
     try {
-      // buscar anotação atual
       const getRes = await fetch(
         `http://localhost:8080/anotacoes/${anotacaoId}`
       );
       if (!getRes.ok) throw new Error("Erro ao buscar anotação para mover");
       const an = await getRes.json();
 
-      // descobrir usuarioId válido
       const usuarioDoAn = an.usuarioId || an.usuario?.id || usuario?.id;
 
       const putPayload = {
         titulo: an.titulo,
         corpo: an.corpo,
         usuarioId: usuarioDoAn,
-        cadernoId: targetCadernoId, // null para sem caderno
+        cadernoId: targetCadernoId,
       };
 
       const putRes = await fetch(
@@ -107,12 +96,10 @@ export default function CadernoList({
       if (!putRes.ok) throw new Error("Erro ao mover anotação");
       const updated = await putRes.json();
 
-      // notificar pai
       if (typeof onAnotacaoMoved === "function") onAnotacaoMoved(updated);
       else if (typeof onAnotacaoCreated === "function")
         onAnotacaoCreated(updated);
 
-      // feedback
       toast({ title: "Anotação movida", status: "success", duration: 2000 });
     } catch (err) {
       console.error("Erro ao mover anotação:", err);
@@ -124,9 +111,8 @@ export default function CadernoList({
     }
   };
 
-  // handlers usados por cada cabeçalho (sem caderno / caderno)
   const onDragOverTarget = (e) => {
-    e.preventDefault(); // permite drop
+    e.preventDefault();
   };
 
   const onDropOnTarget = (e, targetCadernoId) => {
@@ -139,10 +125,8 @@ export default function CadernoList({
       if (!payload) return;
       const { id: anotacaoId, fromCadernoId } = JSON.parse(payload);
 
-      // se não mudou, não faz nada
       if (String(fromCadernoId) === String(targetCadernoId)) return;
 
-      // chama mover
       moveAnotacaoToCaderno(anotacaoId, targetCadernoId);
     } catch (err) {
       console.error("Payload inválido no drop:", err);
@@ -151,7 +135,6 @@ export default function CadernoList({
 
   return (
     <VStack align="stretch" spacing={1} mt={2}>
-      {/* --- Sem caderno (drop válido) --- */}
       <Box
         width="100%"
         onDragOver={onDragOverTarget}
@@ -207,8 +190,7 @@ export default function CadernoList({
             onDrop={(e) => onDropOnTarget(e, caderno.id)}
             onDragEnter={() => {
               setHoverId(caderno.id);
-              // opcional: ao arrastar sobre um caderno, abrir automaticamente (se quiser)
-              // onSelect(caderno);
+              //onSelect(caderno);
             }}
             onDragLeave={() => setHoverId(undefined)}
             bg={isHover ? "gray.50" : "transparent"}
