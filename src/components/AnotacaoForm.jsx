@@ -14,15 +14,9 @@ import {
 import { useState } from "react";
 
 export default function AnotacaoForm({ cadernoId, onAdd, triggerOpen }) {
-  // triggerOpen: boolean to open modal from parent
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [titulo, setTitulo] = useState("");
   const toast = useToast();
-
-  // se o parent mandar abrir, abre o modal
-  // triggerOpen pode ser um contador; para simplicidade, parent chama onOpenRef (ou passa função)
-  // aqui, se triggerOpen é verdade, abriremos via efeito:
-  // (parent will pass a function to call onOpen instead - see usage in AnotacaoList)
 
   const handleSubmit = async () => {
     if (!titulo.trim()) return;
@@ -55,7 +49,7 @@ export default function AnotacaoForm({ cadernoId, onAdd, triggerOpen }) {
       if (!res.ok) throw new Error("Erro ao criar anotação");
 
       const nova = await res.json();
-      onAdd(nova); // parent will handle selecting + refresh
+      onAdd(nova);
       setTitulo("");
       onClose();
       toast({
@@ -76,10 +70,6 @@ export default function AnotacaoForm({ cadernoId, onAdd, triggerOpen }) {
     }
   };
 
-  // Expose the open function to parent via triggerOpen (parent will pass a ref callback).
-  // But simpler: parent will import this component and call openRef.current() - to keep API simple,
-  // we'll instead export a component that parent renders and passes an `open` function via props.
-  // To keep this file minimal, we expose the onOpen function through triggerOpen callback if provided.
   if (triggerOpen && typeof triggerOpen === "function") {
     triggerOpen(onOpen);
   }
