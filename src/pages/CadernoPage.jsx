@@ -11,9 +11,9 @@ import {
 } from "@chakra-ui/react";
 import { FiFolder, FiTrash2, FiEdit2, FiFileText } from "react-icons/fi";
 import { useState } from "react";
-import AnotacaoList from "./AnotacaoList";
+import AnotacaoPage from "../pages/AnotacaoPage";
 
-export default function CadernoList({
+export default function CadernoPage({
   cadernos,
   selecionado,
   onSelect,
@@ -162,7 +162,7 @@ export default function CadernoList({
 
         <Collapse in={selecionado?.isUncategorized} animateOpacity>
           <Box pl={4} mt={2} mb={2}>
-            <AnotacaoList
+            <AnotacaoPage
               cadernoId={null}
               usuarioId={usuario?.id}
               onSelectAnotacao={onSelectAnotacao}
@@ -250,7 +250,7 @@ export default function CadernoList({
 
             <Collapse in={isSelected} animateOpacity>
               <Box pl={4} mt={2} mb={2}>
-                <AnotacaoList
+                <AnotacaoPage
                   cadernoId={caderno.id}
                   usuarioId={usuario?.id}
                   onSelectAnotacao={onSelectAnotacao}

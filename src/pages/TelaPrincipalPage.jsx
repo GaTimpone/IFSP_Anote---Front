@@ -15,7 +15,7 @@ import {
 import { FiPlus, FiLogOut, FiMenu, FiChevronLeft } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import CadernoList from "../components/CadernoList";
+import CadernoPage from "./CadernoPage";
 import CadernoForm from "../components/CadernoForm";
 
 export default function TelaPrincipalPage() {
@@ -199,7 +199,7 @@ export default function TelaPrincipalPage() {
             {mostrarForm && <CadernoForm onAdd={handleNovoCaderno} />}
 
             <Box overflowY="auto" minH="0">
-              <CadernoList
+              <CadernoPage
                 cadernos={cadernos}
                 selecionado={cadernoSelecionado}
                 onSelect={handleSelectCaderno}

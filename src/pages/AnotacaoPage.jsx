@@ -9,9 +9,9 @@ import {
 } from "@chakra-ui/react";
 import { FiFileText, FiPlus } from "react-icons/fi";
 import { useEffect, useState, useRef } from "react";
-import AnotacaoForm from "./AnotacaoForm";
+import AnotacaoForm from "../components/AnotacaoForm";
 
-export default function AnotacaoList({
+export default function AnotacaoPage({
   cadernoId,
   usuarioId,
   onSelectAnotacao,
