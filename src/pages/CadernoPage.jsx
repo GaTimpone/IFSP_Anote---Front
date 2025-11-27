@@ -28,10 +28,11 @@ export default function CadernoPage({
   const [editandoId, setEditandoId] = useState(null);
   const [novoTitulo, setNovoTitulo] = useState("");
   const [hoverId, setHoverId] = useState(undefined);
+  const API_URL = `http://${window.location.hostname}:8080`;
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`http://localhost:8080/cadernos/${id}`, {
+      const res = await fetch(`${API_URL}/cadernos/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Erro ao excluir caderno");
@@ -49,7 +50,7 @@ export default function CadernoPage({
 
   const handleSaveEdit = async (id) => {
     try {
-      const res = await fetch(`http://localhost:8080/cadernos/${id}`, {
+      const res = await fetch(`${API_URL}/cadernos/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ titulo: novoTitulo }),
@@ -70,9 +71,7 @@ export default function CadernoPage({
 
   const moveAnotacaoToCaderno = async (anotacaoId, targetCadernoId) => {
     try {
-      const getRes = await fetch(
-        `http://localhost:8080/anotacoes/${anotacaoId}`
-      );
+      const getRes = await fetch(`${API_URL}/anotacoes/${anotacaoId}`);
       if (!getRes.ok) throw new Error("Erro ao buscar anotação para mover");
       const an = await getRes.json();
 
@@ -85,14 +84,11 @@ export default function CadernoPage({
         cadernoId: targetCadernoId,
       };
 
-      const putRes = await fetch(
-        `http://localhost:8080/anotacoes/${anotacaoId}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(putPayload),
-        }
-      );
+      const putRes = await fetch(`${API_URL}/anotacoes/${anotacaoId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(putPayload),
+      });
       if (!putRes.ok) throw new Error("Erro ao mover anotação");
       const updated = await putRes.json();
 

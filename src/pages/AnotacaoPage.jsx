@@ -24,6 +24,7 @@ export default function AnotacaoPage({
   const [isOver, setIsOver] = useState(false);
   const toast = useToast();
   const openModalRef = useRef(null);
+  const API_URL = `http://${window.location.hostname}:8080`;
 
   const fetchAnotacoes = async () => {
     if (cadernoId === null) {
@@ -32,7 +33,7 @@ export default function AnotacaoPage({
         return;
       }
       try {
-        const res = await fetch(`http://localhost:8080/usuarios/${usuarioId}`);
+        const res = await fetch(`${API_URL}/usuarios/${usuarioId}`);
         if (!res.ok) throw new Error("Erro ao buscar usuário");
         const data = await res.json();
         const userAnotacoes = data.anotacoes || [];
@@ -61,7 +62,7 @@ export default function AnotacaoPage({
     }
 
     try {
-      const res = await fetch(`http://localhost:8080/cadernos/${cadernoId}`);
+      const res = await fetch(`${API_URL}/cadernos/${cadernoId}`);
       if (!res.ok) throw new Error("Erro ao buscar caderno");
       const data = await res.json();
       const lista = data.anotacoes || [];
@@ -119,9 +120,7 @@ export default function AnotacaoPage({
       const targetCadernoId = cadernoId;
       if (String(fromCadernoId) === String(targetCadernoId)) return;
 
-      const getRes = await fetch(
-        `http://localhost:8080/anotacoes/${anotacaoId}`
-      );
+      const getRes = await fetch(`${API_URL}/anotacoes/${anotacaoId}`);
       if (!getRes.ok) throw new Error("Erro ao buscar anotação para mover");
       const an = await getRes.json();
 
@@ -134,14 +133,11 @@ export default function AnotacaoPage({
         cadernoId: targetCadernoId,
       };
 
-      const putRes = await fetch(
-        `http://localhost:8080/anotacoes/${anotacaoId}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(putPayload),
-        }
-      );
+      const putRes = await fetch(`${API_URL}/anotacoes/${anotacaoId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(putPayload),
+      });
       if (!putRes.ok) throw new Error("Erro ao mover anotação");
       const updated = await putRes.json();
 
@@ -211,9 +207,7 @@ export default function AnotacaoPage({
                 justifyContent="flex-start"
                 onClick={async () => {
                   try {
-                    const res = await fetch(
-                      `http://localhost:8080/anotacoes/${a.id}`
-                    );
+                    const res = await fetch(`${API_URL}/anotacoes/${a.id}`);
                     if (!res.ok) throw new Error("Erro ao buscar anotação");
                     const full = await res.json();
                     onSelectAnotacao(full);
