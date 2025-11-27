@@ -30,6 +30,7 @@ export default function TelaPrincipalPage() {
   const [mostrarForm, setMostrarForm] = useState(false);
   const [anotacoesRefreshKey, setAnotacoesRefreshKey] = useState(0);
   const [sidebarAberta, setSidebarAberta] = useState(true);
+  const API_URL = `http://${window.location.hostname}:8080`;
 
   const usuario = JSON.parse(localStorage.getItem("usuario")) || null;
 
@@ -41,7 +42,7 @@ export default function TelaPrincipalPage() {
 
     const fetchUserAndCadernos = async () => {
       try {
-        const res = await fetch(`http://localhost:8080/usuarios/${usuario.id}`);
+        const res = await fetch(`${API_URL}/usuarios/${usuario.id}`);
         if (!res.ok) throw new Error("Erro ao buscar dados do usuário");
         const data = await res.json();
         setCadernos(data.cadernos || []);
@@ -100,7 +101,7 @@ export default function TelaPrincipalPage() {
         cadernoId:
           updated.cadernoId || (cadernoSelecionado && cadernoSelecionado.id),
       };
-      const res = await fetch(`http://localhost:8080/anotacoes/${updated.id}`, {
+      const res = await fetch(`${API_URL}/anotacoes/${updated.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -266,7 +267,7 @@ export default function TelaPrincipalPage() {
                 onClick={async () => {
                   try {
                     const res = await fetch(
-                      `http://localhost:8080/anotacoes/${anotacaoSelecionada.id}`,
+                      `${API_URL}/anotacoes/${anotacaoSelecionada.id}`,
                       { method: "DELETE" }
                     );
                     if (!res.ok) throw new Error("Erro ao excluir anotação");

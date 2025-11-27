@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const API_URL = `http://${window.location.hostname}:8080`;
+
   const handleLogin = async ({ email, senha }) => {
     //console.log("Enviando:", { email, senha });
 
-    const response = await fetch("http://localhost:8080/usuarios/login", {
+    const response = await fetch(`${API_URL}/usuarios/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

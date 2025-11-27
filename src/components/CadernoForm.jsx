@@ -4,6 +4,7 @@ import { useState } from "react";
 export default function CadernoForm({ onAdd }) {
   const [titulo, setTitulo] = useState("");
   const toast = useToast();
+  const API_URL = `http://${window.location.hostname}:8080`;
 
   const handleSubmit = async () => {
     if (!titulo.trim()) return;
@@ -26,7 +27,7 @@ export default function CadernoForm({ onAdd }) {
         usuarioId: usuario.id,
       };
 
-      const res = await fetch("http://localhost:8080/cadernos", {
+      const res = await fetch(`${API_URL}/cadernos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(novoCaderno),

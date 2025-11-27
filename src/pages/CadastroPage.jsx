@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function CadastroPage() {
   const navigate = useNavigate();
+  const API_URL = `http://${window.location.hostname}:8080`;
+
   const handleCadastro = async ({ nome, email, senha }) => {
-    const res = await fetch("http://localhost:8080/usuarios", {
+    const res = await fetch(`${API_URL}/usuarios`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nome, email, senha }),
