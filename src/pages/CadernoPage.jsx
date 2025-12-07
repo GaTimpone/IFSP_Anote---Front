@@ -28,7 +28,7 @@ export default function CadernoPage({
   const [editandoId, setEditandoId] = useState(null);
   const [novoTitulo, setNovoTitulo] = useState("");
   const [hoverId, setHoverId] = useState(undefined);
-  const API_URL = `http://${window.location.hostname}:8080`;
+  const API_URL = `http://${window.location.hostname}`;
 
   const handleDelete = async (id) => {
     try {

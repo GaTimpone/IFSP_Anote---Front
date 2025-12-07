@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function CadernoForm({ onAdd }) {
   const [titulo, setTitulo] = useState("");
   const toast = useToast();
-  const API_URL = `http://${window.location.hostname}:8080`;
+  const API_URL = `http://${window.location.hostname}`;
 
   const handleSubmit = async () => {
     if (!titulo.trim()) return;

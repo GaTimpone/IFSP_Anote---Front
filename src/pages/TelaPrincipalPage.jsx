@@ -30,7 +30,7 @@ export default function TelaPrincipalPage() {
   const [mostrarForm, setMostrarForm] = useState(false);
   const [anotacoesRefreshKey, setAnotacoesRefreshKey] = useState(0);
   const [sidebarAberta, setSidebarAberta] = useState(true);
-  const API_URL = `http://${window.location.hostname}:8080`;
+  const API_URL = `http://${window.location.hostname}`;
 
   const usuario = JSON.parse(localStorage.getItem("usuario")) || null;
 

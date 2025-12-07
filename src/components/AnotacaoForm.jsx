@@ -17,7 +17,7 @@ export default function AnotacaoForm({ cadernoId, onAdd, triggerOpen }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [titulo, setTitulo] = useState("");
   const toast = useToast();
-  const API_URL = `http://${window.location.hostname}:8080`;
+  const API_URL = `http://${window.location.hostname}`;
 
   const handleSubmit = async () => {
     if (!titulo.trim()) return;

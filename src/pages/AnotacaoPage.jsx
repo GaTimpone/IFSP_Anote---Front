@@ -24,7 +24,7 @@ export default function AnotacaoPage({
   const [isOver, setIsOver] = useState(false);
   const toast = useToast();
   const openModalRef = useRef(null);
-  const API_URL = `http://${window.location.hostname}:8080`;
+  const API_URL = `http://${window.location.hostname}`;
 
   const fetchAnotacoes = async () => {
     if (cadernoId === null) {
